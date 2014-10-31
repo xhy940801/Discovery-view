@@ -1,5 +1,5 @@
-Godle
-=====
+Discovery
+=========
 
-A php framework!
-----------------
+View part of discovery
+----------------------
