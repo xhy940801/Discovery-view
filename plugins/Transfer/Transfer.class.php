@@ -79,10 +79,12 @@ class Transfer
 	/**
 	 *	get操作
 	 */
-	public function get($subsystem = $this->subsystem,$action = $this->action)
+	public function get($subsystem = null,$action = null)
 	{
-		$this->subsystem = $subsystem;
-		$this->action = $action;
+		if(!empty($subsystem))
+			$this->subsystem = $subsystem;
+		if(!empty($action))
+			$this->action = $action;
 		createUrl();
 
 		initCurl();
@@ -97,10 +99,12 @@ class Transfer
 	/**
 	 *	post操作
 	 */
-	public function post($obj,$subsystem = $this->subsystem,$action = $this->action)
+	public function post($obj,$subsystem = null,$action = null)
 	{
-		$this->subsystem = $subsystem;
-		$this->action = $action;
+		if(!empty($subsystem))
+			$this->subsystem = $subsystem;
+		if(!empty($action))
+			$this->action = $action;
 		createUrl();
 
 		initCurl();
