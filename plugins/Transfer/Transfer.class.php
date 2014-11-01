@@ -4,13 +4,13 @@ action="http://127.0.0.1:8080/Discovery/login"
 */
 class Transfer
 {
-	var $url;			//完整的地址
-	var $protocol;		//协议
-	var $host;			//主机名
-	var $port;			//端口号
-	var $root;			//根目录名
-	var $subsystem;		//子系统名
-	var $action;		//具体操作函数名
+	var $url;				//完整的地址
+	var $protocol;			//协议
+	var $host;				//主机名
+	var $port;				//端口号
+	var $root = null;		//根目录名
+	var $subsystem = null;	//子系统名
+	var $action = null;		//具体操作函数名
 
 	var $ch;			//curl连接
 
@@ -54,7 +54,19 @@ class Transfer
 	 */
 	private function createUrl()
 	{
-		$this->url = $this->protocol."://".$this->host.":".$this->port."/".$this->root."/".$this->subsystem."/".$this->action;
+		$this->url = $this->protocol."://".$this->host.":".$this->port;
+		if(!empty($this->root))
+		{
+			$this->url = $this->url."/".$this->root;
+		}
+		if(!empty($this->subsystem))
+		{
+			$this->url = $this->url."/".$this->subsystem;
+		}
+		if(!empty($this->action))
+		{
+			$this->url = $this->url."/".$this->action;
+		}
 	} 
 
 	/**
@@ -79,17 +91,17 @@ class Transfer
 	/**
 	 *	get操作
 	 */
-	public function get($subsystem = $this->subsystem,$action = $this->action)
+	public function get($subsystem,$action)
 	{
 		$this->subsystem = $subsystem;
 		$this->action = $action;
-		createUrl();
+		$this->createUrl();
 
-		initCurl();
+		$this->initCurl();
 
-		$re = json_decode(curl_exec($this->ch));
+		$re = json_decode(curl_exec($this->ch),true);
 
-		closeCurl();
+		$this->closeCurl();
 
 		return $re;
 	}
@@ -97,23 +109,22 @@ class Transfer
 	/**
 	 *	post操作
 	 */
-	public function post($obj,$subsystem = $this->subsystem,$action = $this->action)
+	public function post($obj,$subsystem,$action)
 	{
 		$this->subsystem = $subsystem;
 		$this->action = $action;
-		createUrl();
+		$this->createUrl();
 
-		initCurl();
+		$this->initCurl();
 
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $obj);
+		curl_setopt($this->ch, CURLOPT_POST, true);
+		curl_setopt($this->ch, CURLOPT_POSTFIELDS, $obj);
 
-		$re = json_decode(curl_exec($this->ch));
+		$re = json_decode(curl_exec($this->ch),true);
 
-		closeCurl();
+		$this->closeCurl();
 
 		return $re;
 	}
 }
 
-?>

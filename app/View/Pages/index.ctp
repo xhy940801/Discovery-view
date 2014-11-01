@@ -14,7 +14,7 @@
           <span class="prefix">邮箱</span>
         </div>
         <div class="small-10 columns">
-          <input type="text" placeholder="input your email">
+          <input type="text" placeholder="input your email" name="email">
         </div>
       </div>
       <div class="row collapse prefix-radius">
@@ -22,7 +22,7 @@
           <span class="prefix">密码</span>
         </div>
         <div class="small-10 columns">
-          <input type="password" placeholder="input your password">
+          <input type="password" placeholder="input your password" name="password">
         </div>
       </div>
       <div class="row">
