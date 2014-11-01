@@ -91,7 +91,6 @@ class Controller
 				$realUrl .= ('/' . $value);
 		}
 		header('Location: ' . $realUrl);
-		exit();
 	}
 
 	protected function _beforeAction()
