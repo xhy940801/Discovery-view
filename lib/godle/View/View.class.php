@@ -22,8 +22,9 @@ class View
 			$$key = $value;
 		foreach ($this->_helpers as $helper)
 		{
-			App::import($helper, 'Helper');
-			$this->$helper = new $helper();
+			App::import($helper . 'Helper', 'Helper');
+			$helperTrueClassName = $helper . 'Helper';
+			$this->$helper = new $helperTrueClassName();
 		}
 		require(App::uses($this->_layout, 'View' . DIRECTORY_SEPARATOR . 'Layouts', __APP_DIR__, '.ctp'));
 	}

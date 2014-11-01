@@ -4,12 +4,12 @@ class HtmlHelper
 {
 	public function script($name)
 	{
-		return __HOST_URL__ . 'public/js/' . $name . '.js';
+		return '<script src="' . __HOST_URL__ . '/public/js/' . $name . '.js' . '" type="text/javascript"></script>';
 	}
 
 	public function css($name)
 	{
-		return __HOST_URL__ . 'public/css/' . $name . '.css';
+		return '<link rel="stylesheet" href="' . __HOST_URL__ . '/public/css/' . $name . '.css' . '" />';
 	}
 
 	public function url($url, $params)

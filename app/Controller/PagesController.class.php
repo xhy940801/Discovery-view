@@ -1,7 +1,9 @@
 <?php
-include "E:\wamp\www\Discovery-view\plugins\Transfer\Transfer.class.php";
+
 class PagesController extends AppController
 {
+
+	protected $_plugins = array('Transfer');
 
 	public function index()
 	{

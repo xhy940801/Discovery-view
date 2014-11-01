@@ -17,7 +17,6 @@ class Controller
 
 	public function _initController($controller, $action, $config)
 	{
-		$this->initPlugins($this->_plugins);
 		$this->param = array(
 			'controller' => $controller,
 			'action' => $action
@@ -25,6 +24,8 @@ class Controller
 		$this->_viewName = $action;
 		$this->_config = $config;
 		$this->layout = $config['defaultLayout'];
+
+		$this->initPlugins($this->_plugins);
 	}
 
 	public function _doAction($actionParams)
@@ -44,8 +45,8 @@ class Controller
 	{
 		foreach ($plugins as $plugin)
 		{
-			App::importimport($plugin, $plugin, $this->_config['pluginPath']);
-			$this->$plugin = new $plugins();
+			App::import($plugin, $plugin, $this->_config['pluginPath']);
+			$this->$plugin = new $plugin();
 		}
 	}
 
@@ -90,7 +91,6 @@ class Controller
 				$realUrl .= ('/' . $value);
 		}
 		header('Location: ' . $realUrl);
-		exit();
 	}
 
 	protected function _beforeAction()
