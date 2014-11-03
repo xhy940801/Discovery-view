@@ -3,31 +3,62 @@
 class PagesController extends AppController
 {
 
-	protected $_plugins = array('Transfer');
-
 	public function index()
 	{
+
+		if($this->Cookie->has("autoLogin"))
+		{
+			$this->Session->write('User',json_decode($this->Cookie->read("autoLogin")));
+			$this->redirect("Pages/loginTest");
+			exit();
+		}
+
 		if($this->isPost())
 		{
 			$post = $this->getPost();
-			$transfer = new Transfer();
-			$transfer->setProtocol("http");
-			$transfer->setHost("127.0.0.1");
-			$transfer->setPort("8080");
-			$transfer->setRoot("Discovery");
-			$userInfo = $transfer->post($post,null,"login");
+			$this->Transfer->setProtocol("http");
+			$this->Transfer->setHost("127.0.0.1");
+			$this->Transfer->setPort("8080");
+			$this->Transfer->setRoot("Discovery");
+
+			$isAuto = false;
+			if($post['autoLogin'] = 'on')
+			{
+				$isAuto = true;
+			}
+
+			unset($post['autoLogin']);
+
+			$userInfo = $this->Transfer->get($post,null,"login");
+
 			if($userInfo['msg'] == null)
 			{
 				$this->set("error",true);
 			}
 			else
 			{
-				$this->redirect("Pages/loginTest");
+
+				if($isAuto)
+				{
+					$this->Cookie->write('autoLogin',json_encode($userInfo['msg']),array('expire' => (time()+10)));
+				}
+				$this->Session->write('User',$userInfo['msg']);
+				$this->redirect("Users/push");
+				exit();
 			}
 		}
 	}
 
 	public function loginTest()
 	{
+		if(!$this->Session->has('User'))
+		{
+			$this->redirect("Pages/index");
+			exit();
+		}
+		else
+		{
+			print_r($this->Session->read('User'));
+		}
 	}
 }

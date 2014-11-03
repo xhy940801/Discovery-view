@@ -69,6 +69,15 @@ class Transfer
 		}
 	} 
 
+	private function addGet($obj)
+	{
+		$this->url = $this->url."?";
+		foreach ($obj as $key => $value) {
+			$this->url = $this->url.urlencode($key)."=".urlencode($value)."&";
+		}
+		$this->url = substr($this->url, 0,strlen($this->url)-1);
+	}
+
 	/**
 	 *	初始化curl连接
 	 */
@@ -92,13 +101,18 @@ class Transfer
 	 *	get操作
 	 */
 
-	public function get($subsystem = null,$action = null)
+	public function get($obj = null,$subsystem = null,$action = null)
 	{
 		if(!empty($subsystem))
 			$this->subsystem = $subsystem;
 		if(!empty($action))
 			$this->action = $action;
-		createUrl();
+		$this->createUrl();
+
+		if(!empty($obj))
+		{
+			$this->addGet($obj);
+		}
 
 		$this->initCurl();
 
@@ -118,7 +132,7 @@ class Transfer
 			$this->subsystem = $subsystem;
 		if(!empty($action))
 			$this->action = $action;
-		createUrl();
+		$this->createUrl();
 
 		$this->initCurl();
 

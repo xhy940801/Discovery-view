@@ -6,9 +6,14 @@ class Session
 
 	public function __construct()
 	{
-		if(!self::inited)
+		if(!self::$inited)
 			session_start();
-		self::inited = true;
+		self::$inited = true;
+	}
+
+	public function has($key)
+	{
+		return isset($_SESSION[$key]);
 	}
 
 	public function read($key = null)

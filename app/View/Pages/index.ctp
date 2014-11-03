@@ -26,6 +26,11 @@
         </div>
       </div>
       <div class="row">
+        <div class="small-push-5 columns">
+          <input type="checkbox" name="autoLogin" id="cb1" checked="ture"><label for="cb1">下次自动登录</label>
+        </div>
+      </div>
+      <div class="row">
         <div class="small-10 small-centered columns">
           <button class="button expand round" type="submit">登录</button>
         </div>

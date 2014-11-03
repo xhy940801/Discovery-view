@@ -2,6 +2,11 @@
 
 class Cookie
 {
+	public function has($key)
+	{
+		return isset($_COOKIE[$key]);
+	}
+
 	public function read($key = null)
 	{
 		if(isset($key))
@@ -9,7 +14,7 @@ class Cookie
 		return $_COOKIE;
 	}
 
-	public function write(string $key, string $value, $options)
+	public function write($key, $value, $options = array())
 	{
 		$defaultOpt = array(
 			'expire' => null,
