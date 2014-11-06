@@ -29,7 +29,7 @@ class PagesController extends AppController
 
 			unset($post['autoLogin']);
 
-			$userInfo = $this->Transfer->get($post,null,"login");
+			$userInfo = $this->Transfer->get($post,"user","login");
 
 			if($userInfo['msg'] == null)
 			{
@@ -43,7 +43,7 @@ class PagesController extends AppController
 					$this->Cookie->write('autoLogin',json_encode($userInfo['msg']),array('expire' => (time()+10)));
 				}
 				$this->Session->write('User',$userInfo['msg']);
-				$this->redirect("Users/push");
+				$this->redirect(array('controller' => 'Users','action' => 'push'));
 				exit();
 			}
 		}

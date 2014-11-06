@@ -117,6 +117,7 @@ class Transfer
 		$this->initCurl();
 
 		$re = json_decode(curl_exec($this->ch),true);
+		// $re = curl_exec($this->ch);
 
 		$this->closeCurl();
 

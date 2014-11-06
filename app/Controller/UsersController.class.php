@@ -6,7 +6,7 @@ class UsersController extends AppController
 	{
 		if(!$this->Session->has('User'))
 		{
-			$this->redirect("../Pages/index");
+			$this->redirect(array('controller' => 'Pages','action' => 'index'));
 			exit();
 		}
 		else
@@ -18,9 +18,14 @@ class UsersController extends AppController
 
 			$get = array('userId' => $this->Session->read('User')['id']);
 
-			$esseInfo = $this->Transfer->get($get,null,"getEsseInfo");
+			$esseInfo = $this->Transfer->get($get,"user","getEsseInfo");
 
-			print_r($esseInfo);
+			//print_r($esseInfo);
+			//echo "hehehe<br>";
+
+			$pushList = $this->Transfer->get($get,"picture","pushPictList");
+
+			//print_r($pushList);
 		}
 	}
 }
