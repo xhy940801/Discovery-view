@@ -1,9 +1,11 @@
 <?php
 
-class FileController extends AppController
+class FilesController extends AppController
 {
 	public function getImg($id = null)
 	{
+		$this->layout = 'blank';
+
 		$this->Transfer->setProtocol('http');
 		$this->Transfer->setHost('127.0.0.1');
 		$this->Transfer->setPort('8080');
@@ -12,11 +14,10 @@ class FileController extends AppController
 		if($id === null)
 			return;
 
-		$imgInfo = $this->Transfer->get(array('id' => $id), null, 'file/getBase64');
-		$info = json_decode($imgInfo);
-		if(empty($info['code']))
+		$info = $this->Transfer->get(array('id' => $id), null, 'files/getBase64');
+		if($info['code'])
 			return;
 		header('Content-type: ' . $info['msg']['type'] . ';');
-		echo base64_decode($info['msg']['content']);
+		$this->set('img', base64_decode($info['msg']['content']));
 	}
 }

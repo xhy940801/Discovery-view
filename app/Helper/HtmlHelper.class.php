@@ -20,7 +20,7 @@ class HtmlHelper
 	public function url($url, $params = null)
 	{
 		$realUrl = __HOST_URL__ . '/' . $url['controller'] . '/' . $url['action'];
-		foreach ($parmas as $value)
+		foreach ($params as $value)
 			$realUrl .= ('/' . $value);
 		return $realUrl;
 	}

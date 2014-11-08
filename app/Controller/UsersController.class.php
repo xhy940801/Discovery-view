@@ -16,16 +16,16 @@ class UsersController extends AppController
 			$this->Transfer->setPort("8080");
 			$this->Transfer->setRoot("Discovery");
 
-			$get = array('userId' => $this->Session->read('User')['id']);
+			$getByUserId = array('userId' => $this->Session->read('User')['id'],'offset' => 0,'count' => 10 );
 
-			$esseInfo = $this->Transfer->get($get,"user","getEsseInfo");
+			$esseInfo = $this->Transfer->get($getByUserId,"user","getEsseInfo");
+ // print_r($esseInfo);
+			$pushList = $this->Transfer->get($getByUserId,"picture","pushPictList");
+ // print_r($pushList);
 
-			//print_r($esseInfo);
-			//echo "hehehe<br>";
-
-			$pushList = $this->Transfer->get($get,"picture","pushPictList");
-
-			//print_r($pushList);
+			$getByPictId = array('pictureId' => $pushList['msg'][1]['pictureId']);
+			$pictureInfo = $this->Transfer->get($getByPictId,"picture","getPictureInfo");
+			$this->set('pictureId',$pictureInfo['msg']['fileId']);
 		}
 	}
 }
