@@ -1,0 +1,15 @@
+
+.mainNav{
+	background:-webkit-gradient(linear,0 0,0 100%, color-stop(0.0,rgba(11,22,30,0.8)), color-stop(1.0,rgba(10,37,51,0.5)));
+	box-shadow: 0px 0px 70px rgba(0,255,255,0.3);
+	z-index: 100;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	border-bottom:1px solid rgba(0,255,255,0.8)
+}
+
+.top-bar-section ul li{
+	background: transparent;
+}

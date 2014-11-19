@@ -2,6 +2,32 @@
 
 class UsersController extends AppController
 {
+	public function getEsseInfo($userId){
+		$getByUserId = array('userId' => $userId);
+		$esseInfo = $this->Transfer->get($getByUserId,"user","getEsseInfo");
+		return $esseInfo;
+	}
+
+	public function getPushPict($offset,$count){
+		$getByUserId = array('userId' => $this->Session->read('User')['id'],'offset' => $offset,'count' => $count );
+		$pushList = $this->Transfer->get($getByUserId,"picture","pushPictList");
+
+		$list = array();
+
+		foreach ($pushList['msg'] as $key => $value) {
+			$getByPictId = array('pictureId' => $value['pictureId']);
+			$pictureInfo = $this->Transfer->get($getByPictId,"picture","getPictureInfo");
+
+			$getByUserId = array('userId' => $pictureInfo['msg']['userId']);
+			$esseInfo = $this->Transfer->get($getByUserId,"user","getEsseInfo");	
+
+			$pictureInfo['msg']['userInfo'] = $esseInfo['msg'];
+			array_push($list, $pictureInfo['msg']);
+		}
+
+		return $list;
+	}
+
 	public function push()
 	{
 		if(!$this->Session->has('User'))
@@ -16,16 +42,12 @@ class UsersController extends AppController
 			$this->Transfer->setPort("8080");
 			$this->Transfer->setRoot("Discovery");
 
-			$getByUserId = array('userId' => $this->Session->read('User')['id'],'offset' => 0,'count' => 10 );
-
-			$esseInfo = $this->Transfer->get($getByUserId,"user","getEsseInfo");
- // print_r($esseInfo);
-			$pushList = $this->Transfer->get($getByUserId,"picture","pushPictList");
- // print_r($pushList);
-
-			$getByPictId = array('pictureId' => $pushList['msg'][1]['pictureId']);
-			$pictureInfo = $this->Transfer->get($getByPictId,"picture","getPictureInfo");
-			$this->set('pictureId',$pictureInfo['msg']['fileId']);
+			$esseInfo = $this->getEsseInfo($this->Session->read('User')['id']);
+// print_r($esseInfo);
+			$pushList = $this->getPushPict(0,10);
+			
+			$this->set('pictureInfo',$pushList[1]);
 		}
 	}
+
 }

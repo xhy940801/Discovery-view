@@ -1,0 +1,46 @@
+
+#container{
+	top: 0%;
+	left: 0%;
+	height:100%;
+	z-index: 99;
+}
+
+#firstModal{
+    min-width: 600px;
+    position: absolute;
+    top:0px;
+    background: transparent;
+}
+
+#centerDiv{
+    width: 80%;
+    overflow: hidden;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.reveal-modal-bg{
+    
+}
+
+.modalBg{
+    padding: 0px;
+    border: none;
+    box-shadow: none;
+}
+
+.testDiv{
+    /*float:left;*/
+    position: absolute;
+    top: 100px;
+    left: 80%;
+    width: 20%;
+    height: 400px;
+    background-color: red;
+
+}
+
+.columns{
+    padding: 0;
+}

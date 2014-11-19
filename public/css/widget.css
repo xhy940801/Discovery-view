@@ -1,0 +1,10 @@
+
+.pictBlock{
+	position: absolute;
+	height: 100px;
+	width: 100px;
+}
+
+.image{
+	position: absolute;
+}
