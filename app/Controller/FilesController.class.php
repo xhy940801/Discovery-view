@@ -14,7 +14,7 @@ class FilesController extends AppController
 		if($id === null)
 			return;
 
-		$info = $this->Transfer->get(array('id' => $id), null, 'files/getBase64');
+		$info = $this->Transfer->get(array('id' => $id), 'files', 'getBase64');
 		if($info['code'])
 			return;
 		header('Content-type: ' . $info['msg']['type'] . ';');
