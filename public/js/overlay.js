@@ -21,11 +21,12 @@ SmallTriangleOverlay.prototype.draw = function()
 	this._div.style.top = (pixel.y - height) + "px";
 };
 
-function ImageDivOverlay(point, imgUrl, pixel)
+function ImageDivOverlay(point, imgUrl, pixel, info)
 {
 	this._point = point;
 	this._pixel = pixel;
 	this._imgUrl = imgUrl;
+	this._info = info
 }
 
 ImageDivOverlay.prototype = new BMap.Overlay();
@@ -37,6 +38,7 @@ ImageDivOverlay.prototype.initialize = function(map)
 	this._img = document.createElement("img");
 	this._img.src = this._imgUrl;
 	this._div.appendChild(this._img);
+	this._div.setAttribute("data-info", JSON.stringify(this._info));
 	map.getPanes().labelPane.appendChild(this._div);
 	return this._div;
 };

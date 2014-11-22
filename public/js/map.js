@@ -256,7 +256,7 @@ function flushOverlay(tpimages, map, opt)
 	finishImages.sort(function(a, b){return a.pixel.y - b.pixel.y});
 	for (var i = 0; i < finalImages.length; ++i)
 	{
-		var oly = new ImageDivOverlay(finalImages[i].point, finalImages[i].url, finalImages[i].pixel);
+		var oly = new ImageDivOverlay(finalImages[i].point, finalImages[i].url, finalImages[i].pixel, finalImages[i]);
 		overlays.push(oly);
 		map.addOverlay(oly);
 	}
