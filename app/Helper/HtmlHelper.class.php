@@ -17,7 +17,7 @@ class HtmlHelper
 		return __HOST_URL__ . '/public/img/' . $name;
 	}
 
-	public function url($url, $params = null)
+	public function url($url, $params = array())
 	{
 		$realUrl = __HOST_URL__ . '/' . $url['controller'] . '/' . $url['action'];
 		foreach ($params as $value)

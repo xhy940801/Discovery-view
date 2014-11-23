@@ -19,7 +19,7 @@ class UsersController extends AppController
 			$pictureInfo = $this->Transfer->get($getByPictId,"picture","getPictureInfo");
 
 			$getByUserId = array('userId' => $pictureInfo['msg']['userId']);
-			$esseInfo = $this->Transfer->get($getByUserId,"user","getEsseInfo");	
+			$esseInfo = $this->Transfer->get($getByUserId,"user","getEsseInfo");
 
 			$pictureInfo['msg']['userInfo'] = $esseInfo['msg'];
 			array_push($list, $pictureInfo['msg']);
