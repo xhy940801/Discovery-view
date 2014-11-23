@@ -46,7 +46,7 @@ class UsersController extends AppController
 // print_r($esseInfo);
 			$pushList = $this->getPushPict(0,10);
 			
-			$this->set('pictureInfo',$pushList[1]);
+			$this->set('pictureInfo',$pushList);
 		}
 	}
 

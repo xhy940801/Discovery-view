@@ -47,7 +47,7 @@
         var pictHeight=0;
         var pictWidth=0;
 
-		var onePict = "http://localhost/" + "<?php echo $this->Html->url(array('controller' => 'Files', 'action' => 'getImg'), array($pictureInfo['fileId'])); ?>";
+		var onePict = "http://localhost/" + "<?php echo $this->Html->url(array('controller' => 'Files', 'action' => 'getImg'), array($pictureInfo[1]['fileId'])); ?>";
 
 		if(windowHeight <= 500){
         	$("#centerDiv").height("500px");
@@ -74,7 +74,7 @@
 
         function initModal(){
         	$('#centerDiv').css("background-image","url("+onePict+")");
-        	$("#pictUserName").html("<p><?php echo $pictureInfo['userInfo']['nickname']; ?></p>");
+        	$("#pictUserName").html("<p><?php echo $pictureInfo[1]['userInfo']['nickname']; ?></p>");
         }
 
         function adjust(isFirst){
