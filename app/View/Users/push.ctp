@@ -103,6 +103,11 @@
 					}else{
 						isVertical = false;
 					}
+					adjust(true);
+					isBigImage = true;
+					bind();
+					$('#firstModal').foundation('reveal', 'open');
+					$("#bg").fadeIn(250);
 				}
 			}
 
@@ -221,12 +226,6 @@
 
 			$(".overlay-img-block").click(function(){
 				initModal($(this).data("info"));
-				adjust(true);
-				isBigImage = true;
-				bind();
-				$('#firstModal').foundation('reveal', 'open');
-				$("#bg").fadeIn(250);
-				
 			});
 
 			$("#closeModal").click(function(){
