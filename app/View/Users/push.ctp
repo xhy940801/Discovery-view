@@ -2,14 +2,10 @@
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
 	<title>User Push</title>  
-	
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=G6t1cqDFWQBUr5GODv2naEqS"></script>
+
 </head>  
    
 <body>
-	<div id="one" class="pictBlock">
-		<img id="img1" class="image">
-	</div>
 	<nav class="top-bar mainNav" data-topbar role="navigation" data-options="sticky_on: large">
 	</nav>
 
@@ -30,12 +26,8 @@
 	<div id="bg" class="reveal-modal-bg" style="display: none"></div>
 
 	<div id="container" data-pictures='<?php echo json_encode($pictureInfo); ?>'></div>
-	<?php
-		echo $this->Html->css('overlay');
-		echo $this->Html->script('overlay');
-		echo $this->Html->script('map');
-	?>
 	<script type="text/javascript">
+
 		$(document).ready(function()
 		{
 			var isBigImage=false;
@@ -86,6 +78,7 @@
 
 			function resetTL(){
 				pictLeft=0;
+				standardTop=revealTop;
 				pictTop=standardTop;
 			}
 
@@ -149,6 +142,7 @@
 
 						if(scaleCount >= 1.0){
 							scaleCount = 1.0;
+							$("#centerDiv").css("background-size",pictWidth * scaleCount + "px");
 							
 							pictLeft = (currDivWidth - pictWidth * scaleCount) / 2; 
 
