@@ -2,6 +2,17 @@
 
 class InterfaceController extends AppController
 {
+	public function test(){
+		if($this->isPost())
+		{
+			$picIds = "[1,2,3,4,5]";
+			$data = array('pictureIdList' => $picIds);
+			$result = $this->Transfer->get($data,"picture","getPictureInfoList");
+			
+			$this->ajaxReturn($result);
+		}
+	}
+
 	protected function _beforeAction()
 	{
 		$this->Transfer->setProtocol("http");
@@ -10,10 +21,19 @@ class InterfaceController extends AppController
 		$this->Transfer->setRoot("Discovery");
 	}
 
+	public function login()
+	{
+		$email = $this->getPost('email');
+		$password = $this->getPost('password');
+		$data = array('email' => $email,'password' => $password);
+		$secuInfo = $this->Transfer->get($data,"user","login");
+		$this->ajaxReturn($secuInfo);
+	}
+
 	/**
 	 * 获取版本号，需传入用户id，其实就是返回user_esse_info的内容而已（格式和java端返回的一样）
 	 */
-	public function getRevision()
+	public function getEsseInfo()
 	{
 		$userId = $this->getPost('userId');
 		$data = array('userId' => $userId);
@@ -26,13 +46,9 @@ class InterfaceController extends AppController
 	 */
 	public function getPictureInfos()
 	{
-		$picIds = json_decode($this->getPost('pic_ids'));
-		$result = array();
-		foreach ($picIds as $picid)
-		{
-			$data = array('pictureId' => $picid);
-			$result[$picid] = $this->Transfer->get($data,"picture","getPictureInfo");
-		}
+		$picIds = $this->getPost('pic_ids');
+		$data = array('pictureIdList' => $picIds);
+		$result = $this->Transfer->get($data,"picture","getPictureInfoList");
 		$this->ajaxReturn($result);
 	}
 
