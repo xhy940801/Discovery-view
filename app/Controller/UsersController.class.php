@@ -45,6 +45,7 @@ class UsersController extends AppController
 			$esseInfo = $this->getEsseInfo($this->Session->read('User')['id']);
 // print_r($esseInfo);
 			$pushList = $this->getPushPict(0,10);
+			// print_r($pushList);
 			
 			$this->set('pictureInfo',$pushList);
 		}

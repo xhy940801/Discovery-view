@@ -51,14 +51,9 @@ class PagesController extends AppController
 
 	public function loginTest()
 	{
-		if(!$this->Session->has('User'))
-		{
-			$this->redirect("Pages/index");
-			exit();
-		}
-		else
-		{
-			print_r($this->Session->read('User'));
-		}
+		echo urlencode("email");
+		echo urlencode("yczxvc@qq.com");
+		echo urlencode("password");
+		echo urlencode("123456");
 	}
 }

@@ -5,7 +5,13 @@ define('__PUBLIC_DIR__', 'public');
 define('__ROOT__', dirname(__FILE__));
 define('__WEBROOT_DIR__', 'webroot');
 define('__WWW_ROOT__', __ROOT__ . DIRECTORY_SEPARATOR . __APP_DIR__ . DIRECTORY_SEPARATOR . __WEBROOT_DIR__ . DIRECTORY_SEPARATOR);
-define('__HOST_URL__', substr(__ROOT__, strlen($_SERVER['DOCUMENT_ROOT'])));
+
+$url = substr(__ROOT__, strlen($_SERVER['DOCUMENT_ROOT']));
+if (substr($url, 0, 1) == '\\')
+	$url = '/' . substr($url, 1);
+
+define('__HOST_URL__', $url);
+unset($url);
 
 
 require(__ROOT__ . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'godle' . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'App.class.php');
