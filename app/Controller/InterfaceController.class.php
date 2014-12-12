@@ -5,11 +5,21 @@ class InterfaceController extends AppController
 	public function test(){
 		if($this->isPost())
 		{
-			$picIds = "[1,2,3,4,5]";
-			$data = array('pictureIdList' => $picIds);
-			$result = $this->Transfer->get($data,"picture","getPictureInfoList");
-			
-			$this->ajaxReturn($result);
+			$revision = 0;
+			$offset = 0;
+			$count = 10;
+			$userId = 1;
+
+			$data = array('userId' => $userId);
+			$esseInfo = $this->Transfer->get($data,"user","getEsseInfo");
+			$nowRevision = $esseInfo['msg']['revision'];
+
+			$offset += $revision - $nowRevision;
+
+			$data = array('userId' => $userId, 'offset' => $offset, 'count' => $count);
+			$list = $this->Transfer->get($data,"picture","pushPictList");
+
+			$this->ajaxReturn($list);
 		}
 	}
 
