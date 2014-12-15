@@ -86,6 +86,16 @@ class InterfaceController extends AppController
 		$this->ajaxReturn($info);
 	}
 
+	public function appendFile()
+	{
+		$data = array(
+			'id' => $this->getPost('fileId'),
+			'content' => $this->getPost('content')
+			);
+		$info = $this->Transfer->get($data, 'file', 'appendFile');
+		$this->ajaxReturn($info);
+	}
+
 	public function addPicture()
 	{
 		$data = array(
