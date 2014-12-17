@@ -5,21 +5,15 @@ class InterfaceController extends AppController
 	public function test(){
 		if($this->isPost())
 		{
-			$revision = 0;
-			$offset = 0;
-			$count = 10;
-			$userId = 1;
-
-			$data = array('userId' => $userId);
-			$esseInfo = $this->Transfer->get($data,"user","getEsseInfo");
-			$nowRevision = $esseInfo['msg']['revision'];
-
-			$offset += $revision - $nowRevision;
-
-			$data = array('userId' => $userId, 'offset' => $offset, 'count' => $count);
-			$list = $this->Transfer->get($data,"picture","pushPictList");
-
-			$this->ajaxReturn($list);
+			$data = array(
+				'fileId' => 22,
+				'userId' => 1,
+				'longitude' => 0,
+				'latitude' => 0,
+				'remark' => "hehe"
+				);
+			$info = $this->Transfer->post($data, 'picture', 'addPicture');
+			$this->ajaxReturn($info);
 		}
 	}
 
@@ -92,7 +86,7 @@ class InterfaceController extends AppController
 			'name' => $this->getPost('name'),
 			'remark' => $this->getPost('remark')
 			);
-		$info = $this->Transfer->get($data, 'file', 'saveFile');
+		$info = $this->Transfer->post($data, 'files', 'saveFile');
 		$this->ajaxReturn($info);
 	}
 
@@ -101,11 +95,11 @@ class InterfaceController extends AppController
 		$data = array(
 			'fileId' => $this->getPost('fileId'),
 			'userId' => $this->getPost('userId'),
-			'longitude' => $this->getPost('longitude');
+			'longitude' => $this->getPost('longitude'),
 			'latitude' => $this->getPost('latitude'),
 			'remark' => $this->getPost('remark')
 			);
-		$info = $this->Transfer->get($data, 'file', 'saveFile');
+		$info = $this->Transfer->post($data, 'files', 'addPicture');
 		$this->ajaxReturn($info);
 	}
 }
